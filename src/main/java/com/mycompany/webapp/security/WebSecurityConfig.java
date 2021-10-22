@@ -79,6 +79,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		// TODO Auto-generated method stub
+		return super.authenticationManagerBean();
+	}
+	
+	@Bean
 	public RoleHierarchyImpl roleHierarchyImpl() {
 		log.info("실행");
 		RoleHierarchyImpl roleHierarchyImpl = new RoleHierarchyImpl();
