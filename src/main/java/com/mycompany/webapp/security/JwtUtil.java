@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 public class JwtUtil {
 	// *비밀키(노출이 되면 안됨)
 	// *서버가 자기 자신이 발행한 JWT인지 아닌지 검사할때만 사용 (토큰을 해석하기 위한 키가 아님)
-	private static final String secretKey = "qwer";
+	private static final String secretKey = "12345";
 	
 	// <JWT 생성 ( 개인정보는 JWT에 저장하면 안됨)>
 	public static String createToken(String mid, String authority) {

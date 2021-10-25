@@ -53,6 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		JwtCheckFilter jwtCheckFilter = new JwtCheckFilter();
 		// *id와 password 인증 작업 전에 jwt로 인증을 하게 한다. -> jwt로 인증 되면 UsernamePass~Filter의 작업을 수행하지 않아도 된다.
 		http.addFilterBefore(jwtCheckFilter, UsernamePasswordAuthenticationFilter.class);
+		
+		// <CORS 설정 활성화>
+		http.cors();
 	}	
 	
 	@Override
@@ -99,7 +102,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		roleHierarchyImpl.setHierarchy("ROLE_ADMIN > ROLE_MANAGER > ROLE_USER");
 		return roleHierarchyImpl;
 	}
-			
+	
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration conf = new CorsConfiguration();
+		// 모든 요청 사이트 허용
+		conf.addAllowedOrigin("*");
+		// 모든 요청 방식 허용
+		conf.addAllowedMethod("*");
+		// 모든 요청 헤드 허용
+		conf.addAllowedHeader("*");
+		
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", conf);
+		return source;
+	}
 }
  
  
