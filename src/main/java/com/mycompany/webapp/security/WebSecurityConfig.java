@@ -46,6 +46,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/board/**").authenticated()
 			.antMatchers("/**").permitAll();
 		
+		//세션 비활성화
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
+		//<JwtCheckFilter 추가>
+		JwtCheckFilter jwtCheckFilter = new JwtCheckFilter();
+		// *id와 password 인증 작업 전에 jwt로 인증을 하게 한다. -> jwt로 인증 되면 UsernamePass~Filter의 작업을 수행하지 않아도 된다.
+		http.addFilterBefore(jwtCheckFilter, UsernamePasswordAuthenticationFilter.class);
 	}	
 	
 	@Override
